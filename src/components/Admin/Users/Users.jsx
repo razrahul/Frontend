@@ -42,27 +42,31 @@ const Users = () => {
   const dispatch = useDispatch();
 
   const updateHandler = userId => {
-    dispatch(updateUserRole(userId));
+    dispatch(updateUserRole(userId,onResponse ))
   };
   const deleteButtonHandler = userId => {
-    dispatch(deleteUser(userId));
+    dispatch(deleteUser(userId, onResponse));
   };
+
+  const onResponse = () =>{
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
+
+   else if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+
+    dispatch(getAllUsers());
+  }
 
   
 
   useEffect(() => {
-    if (error) {
-          toast.error(error);
-          dispatch({ type: 'clearError' });
-        }
-    
-       else if (message) {
-          toast.success(message);
-          dispatch({ type: 'clearMessage' });
-        }
-    
     dispatch(getAllUsers());
-  }, [dispatch, error, message]);
+  }, []);
 
 
   return (

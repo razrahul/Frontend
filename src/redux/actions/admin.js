@@ -122,7 +122,7 @@ export const getAllUsers = () =>  async (dispatch) =>{
 
 }
 
-export const updateUserRole = (id) =>  async (dispatch) =>{
+export const updateUserRole = (id, callback) =>  async (dispatch) =>{
     try {
         dispatch({ type: 'updateUserRoleRequest' });
     
@@ -134,18 +134,20 @@ export const updateUserRole = (id) =>  async (dispatch) =>{
            }
           
         );
-    
+        
         dispatch({ type: 'updateUserRoleSuccess', payload: data.message });
+        callback()
       } catch (error) {
         dispatch({
           type: 'updateUserRoleFail',
           payload: error.response?.data?.message || 'Something went wrong',
         });
+        callback()
       }
 
 }
 
-export const deleteUser = (id) =>  async (dispatch) =>{
+export const deleteUser = (id, callback) =>  async (dispatch) =>{
     try {
         dispatch({ type: 'deleteUserRequest' });
     
@@ -158,11 +160,13 @@ export const deleteUser = (id) =>  async (dispatch) =>{
         );
     
         dispatch({ type: 'deleteUserSuccess', payload: data.message });
+        callback()
       } catch (error) {
         dispatch({
           type: 'deleteUserFail',
           payload: error.response?.data?.message || 'Something went wrong',
         });
+        callback()
       }
 
 }
