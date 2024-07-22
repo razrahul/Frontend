@@ -21,6 +21,7 @@ import  { createCourse} from "../../../redux/actions/admin"
 const CreateCourse = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [price, setPrice] = useState();
   const [createdBy, setCreatedBy] = useState('');
   const [category, setCategory] = useState('');
   const [image, setImage] = useState('');
@@ -55,6 +56,7 @@ const CreateCourse = () => {
     const myForm = new FormData();
     myForm.append('title', title);
     myForm.append('description', description);
+    myForm.append('price', price);
     myForm.append('category', category);
     myForm.append('createdBy', createdBy);
     myForm.append('file', image);
@@ -102,6 +104,13 @@ const CreateCourse = () => {
               value={description}
               onChange={e => setDescription(e.target.value)}
               placeholder="Description"
+              type={'text'}
+              focusBorderColor="purple.300"
+            />
+            <Input
+              value={price}
+              onChange={e => setPrice(e.target.value)}
+              placeholder="Price"
               type={'text'}
               focusBorderColor="purple.300"
             />

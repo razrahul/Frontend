@@ -95,7 +95,7 @@ function App() {
             <Route path="request" element={<Request />} />
             <Route path="about" element={<About />} />
             <Route
-              path="subscribe"
+              path="subscribe/:id"
               element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
                   <Subscribe />
