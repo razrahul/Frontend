@@ -94,7 +94,7 @@ const Course = ({
           <Text
             width="250px"
             fontWeight="bold"
-            bgColor="yellow.400"
+            bgColor="yellow.500"
             fontSize="lg"
             color="black"
             p={2} 

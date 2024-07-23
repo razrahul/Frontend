@@ -13,38 +13,40 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import { courseRequest } from '../../redux/actions/other';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import { useEffect } from 'react';
+import { courseRequest } from '../../redux/actions/other';
+
 
 const Request = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [course, setCourse] = useState('');
 
-  // const dispatch = useDispatch();
-  // const {
-  //   loading,
-  //   error,
-  //   message: stateMessage,
-  // } = useSelector(state => state.other);
+  const dispatch = useDispatch();
+  const {
+    loading,
+    error,
+    message: stateMessage,
+  } = useSelector(state => state.other);
 
   const submitHandler = e => {
     e.preventDefault();
-    console.log(name,email,course)
-    // dispatch(courseRequest(name, email, course));
+    // console.log(name,email,course)
+    dispatch(courseRequest(name, email, course))
   };
 
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error);
-  //     // dispatch({ type: 'clearError' });
-  //   }
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      // dispatch({ type: 'clearError' });
+    }
 
-  //   if (stateMessage) {
-  //     toast.success(stateMessage);
-  //     // dispatch({ type: 'clearMessage' });
-  //   }
-  // }, [dispatch, error, stateMessage]);
+    if (stateMessage) {
+      toast.success(stateMessage);
+      // dispatch({ type: 'clearMessage' });
+    }
+  }, [dispatch, error, stateMessage]);
 
   return (
     <Container h="92vh">
@@ -91,7 +93,7 @@ const Request = () => {
           </Box>
 
           <Button
-            // isLoading={loading}
+            isLoading={loading}
             my="4"
             colorScheme={'yellow'}
             type="submit"
