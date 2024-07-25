@@ -24,15 +24,6 @@ import Sidebar from '../Sidebar';
 import CourseModal from './CourseModal';
 import { getAllCourses, getCourseLectures } from "../../../redux/actions/course"
 import { deleteCourse, addLecture, deleteLecture} from '../../../redux/actions/admin'
-// import {
-//   getAllCourses,
-//   getCourseLectures,
-// } from '../../../redux/actions/course';
-// import {
-//   addLecture,
-//   deleteCourse,
-//   deleteLecture,
-// } from '../../../redux/actions/admin';
 import { toast } from 'react-toastify';
 
 
