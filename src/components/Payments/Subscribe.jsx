@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom";
 import { server } from '../../redux/store';
 import { buySubscription } from "../../redux/actions/subscription";
 import { toast } from "react-toastify";
+import { addToPlaylist} from '../../redux/actions/profile'
 
 const Subscribe = ({ user }) => {
  
@@ -99,8 +100,9 @@ const Subscribe = ({ user }) => {
       };
       openPopUp();
     }
+    // dispatch(addToPlaylist(params.id))
   }, [
-    dispatch,
+    // dispatch,
     error,
     // courseError,
     user.name,
