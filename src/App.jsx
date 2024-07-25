@@ -98,7 +98,7 @@ function App() {
               path="subscribe/:id"
               element={
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <Subscribe />
+                  <Subscribe user={user} />
                 </ProtectedRoute>
               }
             />

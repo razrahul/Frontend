@@ -3,6 +3,7 @@ import {userReducer, profileReducer} from "./reducers/userReducer";
 import { courseReducer } from "./reducers/courseReducer";
 import { adminReducer } from "./reducers/adminReducer";
 import {otheReducer} from "./reducers/otherReducer"
+import { subscriptionReducer } from "./reducers/subscriptionReducer";
 
 
 const store = configureStore({
@@ -12,6 +13,7 @@ const store = configureStore({
         course: courseReducer,
         admin: adminReducer,
         other: otheReducer,
+        subscription: subscriptionReducer,
     },
 });
 

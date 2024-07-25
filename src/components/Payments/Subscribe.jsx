@@ -10,27 +10,30 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { buySubscription } from '../../redux/actions/user';
-// import { server } from '../../redux/store';
-import toast from "react-hot-toast";
 import logo from "../../assets/images/logo.png";
 import { useParams } from "react-router-dom";
+import { server } from '../../redux/store';
+import { buySubscription } from "../../redux/actions/subscription";
+import { toast } from "react-toastify";
 
 const Subscribe = ({ user }) => {
-  // const dispatch = useDispatch();
-  const [key, setKey] = useState("");
+ 
 
-  
+  //yaha se
   const { courses } = useSelector((state) => state.course);
   // console.log(courses)
 
   const params = useParams()
   // console.log(params.id)
 
+ 
 
   const Course = courses.find((course) => {
     return course._id === params.id;
   });
+
+  
+  
   
   // if (Course) {
   //   console.log(Course);
@@ -39,67 +42,72 @@ const Subscribe = ({ user }) => {
   //   console.log('Course not found');
   // }
   
-  
+  //yaha tak
 
-  // const { loading, error, subscriptionId } = useSelector(
-  //   state => state.subscription
-  // );
+   const dispatch = useDispatch();
+   const [key, setKey] = useState("");
+
+  const { loading, error, subscriptionId } = useSelector(
+    state => state.subscription );
+
   // const { error: courseError } = useSelector(state => state.course);
 
   const subscribeHandler = async () => {
     const {
       data: { key },
     } = await axios.get(`${server}/razorpaykey`);
-
+    // setKey(data.key)
     setKey(key);
-    // dispatch(buySubscription());
+    dispatch(buySubscription(params.id));
   };
 
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error);
-  //     dispatch({ type: 'clearError' });
-  //   }
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
   //   if (courseError) {
   //     toast.error(courseError);
   //     dispatch({ type: 'clearError' });
   //   }
-  //   if (subscriptionId) {
-  //     const openPopUp = () => {
-  //       const options = {
-  //         key,
-  //         name: 'CourseBundler',
-  //         description: 'Get access to all premium content',
-  //         image: logo,
-  //         subscription_id: subscriptionId,
-  //         callback_url: `${server}/paymentverification`,
-  //         prefill: {
-  //           name: user.name,
-  //           email: user.email,
-  //           contact: '',
-  //         },
-  //         notes: {
-  //           address: '6 pack programmer at youtube',
-  //         },
-  //         theme: {
-  //           color: '#FFC800',
-  //         },
-  //       };
+    if (subscriptionId) {
+      const openPopUp = () => {
+        const options = {
+          key,
+          amount:Course.price,
+          currency:"INR",
+          name: 'E-Learning Web App',
+          description: 'Get access in Course to all Mega content',
+          image: logo,
+          subscription_id: subscriptionId,
+          callback_url: `${server}/paymentverification`,
+          prefill: {
+            name: user.name,
+            email: user.email,
+            contact: '',
+          },
+          notes: {
+            address: 'CodeBucket Ptv Ltd.',
+          },
+          theme: {
+            color: '#FFC800',
+          },
+        };
 
-  //       const razor = new window.Razorpay(options);
-  //       razor.open();
-  //     };
-  //     openPopUp();
-  //   }
-  // }, [
-  //   dispatch,
-  //   error,
-  //   courseError,
-  //   user.name,
-  //   user.email,
-  //   key,
-  //   subscriptionId,
-  // ]);
+        const razor = new window.Razorpay(options);
+        razor.open();
+      };
+      openPopUp();
+    }
+  }, [
+    dispatch,
+    error,
+    // courseError,
+    user.name,
+    user.email,
+    key,
+    subscriptionId,
+  ]);
 
   return (
     <Container h="90vh" p="16"  mb="10">
@@ -127,7 +135,7 @@ const Subscribe = ({ user }) => {
             w="full"
             colorScheme={"yellow"}
             onClick={subscribeHandler}
-            // isLoading={loading}
+            isLoading={loading}
           >
             Buy Now
           </Button>
