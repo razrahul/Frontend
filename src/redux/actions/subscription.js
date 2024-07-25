@@ -23,3 +23,25 @@ export const buySubscription = (id) => async (dispatch) => {
         });
     }
 };
+export const cancelSubscription = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: "cancelSubscriptionRequest" });
+
+        const { data } = await axios.post(
+            `${server}/subscription/cancel?id=${id}`,
+           
+            {
+              headers: { 'Content-Type': 'application/json' },
+              withCredentials: true,
+            }
+          );
+      
+
+        dispatch({ type: "cancelSubscriptionSuccess", payload: data.message });
+    } catch (error) {
+        dispatch({
+            type: "cancelSubscriptionFail",
+            payload: error.response.data.message,
+        });
+    }
+};
