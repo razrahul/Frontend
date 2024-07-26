@@ -25,6 +25,8 @@ import {
   Login,
   Register,
   ResetPassword,
+  MYCourses,
+  CancelSubscribe,
 } from "./components/index";
 import viteLogo from "/vite.svg";
 import { useSelector, useDispatch } from "react-redux";
@@ -89,7 +91,8 @@ function App() {
           <Header isAuthenticated={isAuthenticated} user={user} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="courses" element={<Courses />} />
+            <Route path="courses" element={<Courses  />} />
+            <Route path="mycourses" element={<MYCourses user={user} />} />
             <Route path="course/:id" element={<CoursePage />} />
             <Route path="contact" element={<Contact />} />
             <Route path="request" element={<Request />} />
@@ -100,6 +103,14 @@ function App() {
                 <ProtectedRoute isAuthenticated={isAuthenticated}>
                   <Subscribe user={user} />
                 </ProtectedRoute>
+              }
+            />
+            <Route
+              path="cancelsubscribe/:id"
+              element={
+                // <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  <CancelSubscribe user={user} />
+                // </ProtectedRoute>
               }
             />
             <Route path="paymentsuccess" element={<PaymentSuccess />} />

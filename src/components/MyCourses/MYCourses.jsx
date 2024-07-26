@@ -66,8 +66,8 @@ const Course = ({
           Add to playlist
         </Button>
       </Stack>
-      <VStack alignItems="center">
-        <Box display="flex" justifyContent="center" alignItems="center" width="100%">
+      <VStack pt={5} alignItems="center">
+        {/* <Box display="flex" justifyContent="center" alignItems="center" width="100%">
           <Text
             width="250px"
             fontWeight="bold"
@@ -80,10 +80,10 @@ const Course = ({
           >
             Price - ₹ {price}
           </Text>
-        </Box>
+        </Box> */}
         <Link to={`/cancelsubscribe/${id}`}>
-          <Button width="250px" colorScheme={"blue"}>
-            Buy Now
+          <Button width="250px" colorScheme={"red"}>
+           Cancel Subscription
           </Button>
         </Link>
       </VStack>

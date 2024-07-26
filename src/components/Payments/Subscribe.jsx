@@ -14,7 +14,7 @@ import logo from "../../assets/images/logo.png";
 import { useParams } from "react-router-dom";
 import { server } from '../../redux/store';
 import { buySubscription } from "../../redux/actions/subscription";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import { addToPlaylist} from '../../redux/actions/profile'
 
 const Subscribe = ({ user }) => {
@@ -61,6 +61,8 @@ const Subscribe = ({ user }) => {
     setKey(key);
     dispatch(buySubscription(params.id));
   };
+ 
+
 
   useEffect(() => {
     if (error) {

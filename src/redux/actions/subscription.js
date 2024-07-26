@@ -27,7 +27,7 @@ export const cancelSubscription = (id) => async (dispatch) => {
     try {
         dispatch({ type: "cancelSubscriptionRequest" });
 
-        const { data } = await axios.post(
+        const { data } = await axios.delete(
             `${server}/subscription/cancel?id=${id}`,
            
             {

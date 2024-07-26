@@ -29,6 +29,17 @@ import { updateProfilePicture, removeFormPlaylist } from '../../redux/actions/pr
 import { loadUser } from '../../redux/actions/user';
 
 const Profile = ({user}) => {
+  console.log(user)
+
+  const [courseId, setcourseId] = useState()
+
+  const courseId1 = user.subscription.map((item) =>console.log( item.course))
+//  setcourseId(courseId1)
+  // console.log(courseId1)
+
+
+
+
   //dayanomacally
 
   // const user ={
