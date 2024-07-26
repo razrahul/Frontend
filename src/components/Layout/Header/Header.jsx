@@ -69,6 +69,11 @@ const Header = ({ isAuthenticated = false, user   }) => {
               />
               <LinkButton
                 onClose={onClose}
+                url="/mycourses"
+                title="My Courses"
+              />
+              <LinkButton
+                onClose={onClose}
                 url="/request"
                 title="Request a Course"
               />

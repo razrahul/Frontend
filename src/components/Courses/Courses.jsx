@@ -120,6 +120,7 @@ const Courses = () => {
   const [category, setCategory] = useState("");
   const dispatch = useDispatch();
 
+ 
   const { loading, courses, error, message } = useSelector(
     (state) => state.course
   );
@@ -169,7 +170,7 @@ const Courses = () => {
         paddingY="8"
         css={{
           "&::-webkit-scrollbar": {
-            display: "scrollbar", // scrollbar
+            display: "scrollbar", // scrollbar/none
           },
         }}
       >

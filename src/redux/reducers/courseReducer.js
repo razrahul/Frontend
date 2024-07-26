@@ -15,6 +15,17 @@ export const courseReducer =createReducer({
         state.loading = false;
         state.error = action.payload;
       })
+      .addCase('getCourseByIdRequest', (state) => {
+        state.loading = true;
+      })
+      .addCase('getCourseByIdSuccess', (state, action) => {
+        state.loading = false;
+        state.courses = action.payload;
+      })
+      .addCase('getCourseByIdFail', (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
       .addCase('getCourseLecturesRequest', (state) => {
         state.loading = true;
       })

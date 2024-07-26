@@ -20,6 +20,32 @@ export const getAllCourses = (category="", keyword="") => async (dispatch) => {
     }
   };
 
+  
+
+  export const getCourseById = (id) => async (dispatch) => {
+    try {
+      dispatch({ type: 'getCourseByIdRequest' });
+  
+      const { data } = await axios.get(`http://localhost:8000/api/v1/mycourses/${id}`, {
+        withCredentials: true,
+      });
+  
+      dispatch({ type: 'getCourseByIdSuccess', payload: data.courses });
+  
+      // Return the full response so it can be used by the calling function
+      return data;
+    } catch (error) {
+      dispatch({
+        type: 'getCourseByIdFail',
+        payload: error.response?.data?.message || 'Something went wrong',
+      });
+  
+      // Return a rejected promise so the calling function can handle the error
+      throw error;
+    }
+  };
+  
+  
 export const getCourseLectures = (id) => async (dispatch) => {
     try {
       dispatch({ type: 'getCourseLecturesRequest' });
