@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import {
   Box,
   Button,
@@ -59,12 +60,13 @@ const CancelSubscribe = ({ user }) => {
     error,
   ]);
 
-  
+  const navigate = useNavigate();
 
   const cancelSubscriptionHandler = async() => {
    await dispatch(cancelSubscription(params.id));
     toast.success("Subscription cancelled successfully");
     onClose();
+    navigate("/mycourses");
   };
 
   return (
