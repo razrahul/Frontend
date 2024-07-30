@@ -42,8 +42,8 @@ const PaymentSuccess = () => {
           </VStack>
         </Box>
 
-        <Link to="/profile">
-          <Button variant={'ghost'}>Go to profile</Button>
+        <Link to="/mycourses">
+          <Button variant={'ghost'}>Go to My Courses</Button>
         </Link>
 
         <Heading size={'xs'}>Reference: {reference}</Heading>

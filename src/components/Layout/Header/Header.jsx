@@ -12,7 +12,7 @@ import {
 import React from 'react';
 import { ColorModeSwitcher } from '../../../ColorModeSwitcher';
 import { RiDashboardFill, RiLogoutBoxLine, RiMenu5Fill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/actions/user';
 
@@ -29,11 +29,14 @@ const Header = ({ isAuthenticated = false, user   }) => {
   // const user ={
   //   role: "admin",
   // }
+  const navigate = useNavigate() 
+   
   const dispatch = useDispatch();
   
   const logoutHandler = () => {
     onClose();
     dispatch(logout());
+    navigate('/login');
   };
 
   return (
@@ -55,7 +58,7 @@ const Header = ({ isAuthenticated = false, user   }) => {
       </Button>
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
-        <DrawerOverlay /> */backdropFilter={'blur(3px)'} */
+        <DrawerOverlay  /> */backdropFilter={'blur(3px)'} */
         <DrawerContent>
           <DrawerHeader borderBottomWidth={'1px'}>COURSE BUNDLER</DrawerHeader>
 
@@ -67,11 +70,16 @@ const Header = ({ isAuthenticated = false, user   }) => {
                 url="/courses"
                 title="Browse All Courses"
               />
-              <LinkButton
-                onClose={onClose}
-                url="/mycourses"
-                title="My Courses"
-              />
+              {isAuthenticated && user.role !== "admin"  ? (
+                <LinkButton 
+                  onClose={onClose}
+                  url="/mycourses"
+                  title="My Courses"
+                />
+              ) : (
+                <></>
+              )}
+              
               <LinkButton
                 onClose={onClose}
                 url="/request"
@@ -86,7 +94,7 @@ const Header = ({ isAuthenticated = false, user   }) => {
                 bottom={'2rem'}
                 width="80%"
               >
-                {isAuthenticated ? (
+                {isAuthenticated  ? (
                   <>
                     <VStack>
                       <HStack>

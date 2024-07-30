@@ -9,7 +9,6 @@ import {
   Stack,
   Text,
   VStack,
-  Box,
   Spinner,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
@@ -67,20 +66,6 @@ const Course = ({
         </Button>
       </Stack>
       <VStack pt={5} alignItems="center">
-        {/* <Box display="flex" justifyContent="center" alignItems="center" width="100%">
-          <Text
-            width="250px"
-            fontWeight="bold"
-            bgColor="yellow.500"
-            fontSize="lg"
-            color="black"
-            p={2} 
-            borderRadius="md" 
-            textAlign="center"
-          >
-            Price - ₹ {price}
-          </Text>
-        </Box> */}
         <Link to={`/cancelsubscribe/${id}`}>
           <Button width="250px" colorScheme={"red"}>
            Cancel Subscription
@@ -101,7 +86,8 @@ const MYCourses = ({ user }) => {
 
   const fetchSubscribedCourses = async () => {
     try {
-      const courseIds = user.subscription.map((item) => item.course);
+      const activeSubscriptions = user.subscription.filter(item => item.status === "active");
+      const courseIds = activeSubscriptions.map(item => item.course);
 
       const courses = await Promise.all(
         courseIds.map(async (id) => {
@@ -114,14 +100,11 @@ const MYCourses = ({ user }) => {
           }
         })
       );
-      // Debugging the subscribedCourses
-      // console.log(courses);
-      // Ensure all courses are unique
-      // const uniqueCourses = Array.from(new Set(courses.map(course => course?._id)))
-      //   .map(id => courses.find(course => course?._id === id));
 
-      // setSubscribedCourses(uniqueCourses.filter(course => course !== null && course !== undefined));
-      setSubscribedCourses(courses)
+      // Remove duplicates and null values
+      const uniqueCourses = Array.from(new Set(courses.filter(course => course !== null && course !== undefined)));
+
+      setSubscribedCourses(uniqueCourses);
     } catch (error) {
       toast.error("Failed to load subscribed courses");
       console.error("Error fetching subscribed courses:", error);
