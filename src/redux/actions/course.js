@@ -26,7 +26,7 @@ export const getAllCourses = (category="", keyword="") => async (dispatch) => {
     try {
       dispatch({ type: 'getCourseByIdRequest' });
   
-      const { data } = await axios.get(`http://localhost:8000/api/v1/mycourses/${id}`, {
+      const { data } = await axios.get(`${server}/mycourses/${id}`, {
         withCredentials: true,
       });
   
