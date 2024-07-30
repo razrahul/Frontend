@@ -36,6 +36,7 @@ export const courseReducer =createReducer({
       .addCase('getCourseLecturesFail', (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.lectures = [];
       })
       .addCase('addToPlaylistRequest', (state) => {
         state.loading = true;

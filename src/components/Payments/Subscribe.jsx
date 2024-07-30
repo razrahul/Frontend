@@ -29,7 +29,7 @@ const Subscribe = ({ user }) => {
 
  
 
-  const Course = courses.find((course) => {
+  const Course = courses?.find((course) => {
     return course._id === params.id;
   });
 

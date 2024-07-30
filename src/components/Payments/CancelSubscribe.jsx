@@ -37,9 +37,18 @@ const CancelSubscribe = ({ user }) => {
   useEffect(() => {
     dispatch(getAllCourses());
   }, [dispatch]);
+  
+  useEffect(() => {
+    setData(courses);
+  }, [courses]);
 
-  const Course = courses.find((course) => course._id === params.id);
+  
+  const [data, setData ]= useState([]);
 
+  const Course = data.length>0 && data?.find((course) => course?._id === params?.id);
+  
+  // console.log(data)
+  // console.log(Course)
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -52,8 +61,8 @@ const CancelSubscribe = ({ user }) => {
 
   
 
-  const cancelSubscriptionHandler = () => {
-    dispatch(cancelSubscription(params.id));
+  const cancelSubscriptionHandler = async() => {
+   await dispatch(cancelSubscription(params.id));
     toast.success("Subscription cancelled successfully");
     onClose();
   };
@@ -62,7 +71,7 @@ const CancelSubscribe = ({ user }) => {
     <Container h="90vh" p="16" mb="8">
       <Heading children="Subscription Details" my="8" textAlign={"center"} />
 
-      {Course ? (
+      {Course   ? (
         <VStack
           boxShadow={"lg"}
           alignItems="stretch"

@@ -41,6 +41,7 @@ const CoursePage = ({ user }) => {
 
   const { lectures, loading } = useSelector(state => state.course);
 
+
   const dispatch = useDispatch();
   const params = useParams();
   console.log(params.id)
