@@ -2,6 +2,26 @@ import { createReducer } from "@reduxjs/toolkit";
 
 export const adminReducer = createReducer({}, (builder) => {
   builder
+    .addCase("getAdminStatsRequest", (state) => {
+      state.loading = true;
+    })
+    .addCase("getAdminStatsSuccess", (state, action) => {
+      state.loading = false;
+      state.stats = action.payload.stats;
+      state.viewsCount = action.payload.viewsCount;
+      state.subscriptionCount = action.payload.subscriptionCount;
+      state.usersCount = action.payload.usersCount;
+      state.subscriptionPercentage = action.payload.subscriptionPercentage;
+      state.viewsPercentage = action.payload.viewsPercentage;
+      state.usersPercentage = action.payload.usersPercentage;
+      state.subscriptionProfit = action.payload.subscriptionProfit;
+      state.viewsProfit = action.payload.viewsProfit;
+      state.usersProfit = action.payload.usersProfit;
+    })
+    .addCase("getAdminStatsFail", (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
     .addCase("getAllUsersRequest", (state) => {
       state.loading = true;
     })

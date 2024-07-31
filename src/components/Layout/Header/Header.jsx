@@ -60,7 +60,7 @@ const Header = ({ isAuthenticated = false, user   }) => {
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay  /> */backdropFilter={'blur(3px)'} */
         <DrawerContent>
-          <DrawerHeader borderBottomWidth={'1px'}>COURSE BUNDLER</DrawerHeader>
+          <DrawerHeader borderBottomWidth={'1px'}> E-LEARNING</DrawerHeader>
 
           <DrawerBody>
             <VStack spacing={'4'} alignItems="flex-start">
