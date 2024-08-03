@@ -63,7 +63,7 @@ const CancelSubscribe = ({ user }) => {
   const navigate = useNavigate();
 
   const cancelSubscriptionHandler = async() => {
-   await dispatch(cancelSubscription(params.id));
+   await dispatch(cancelSubscription(params.id)) 
     toast.success("Subscription cancelled successfully");
     onClose();
     navigate("/mycourses");

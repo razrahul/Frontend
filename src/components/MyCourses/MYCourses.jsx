@@ -32,8 +32,24 @@ const Course = ({
   loading,
 }) => {
   return (
-    <VStack className="course" alignItems={["center", "flex-start"]}>
-      <Image src={imageSrc} boxSize="60" objectFit={"contain"} />
+    <VStack
+    className="course"
+    alignItems={["center", "flex-start"]}
+    spacing={4}
+    p={4}
+    // borderWidth="1px"
+    // borderRadius="md"
+    // boxShadow="md"
+    width={["full", "300px"]}
+  >
+    <Image
+      src={imageSrc}
+      alt={title}
+      width="100%" 
+      height="220px" 
+      objectFit="cover" 
+      borderRadius="md" 
+    />
       <Heading
         textAlign={["center", "left"]}
         maxW="200px"
@@ -78,7 +94,7 @@ const Course = ({
 
 const MYCourses = ({ user }) => {
   const [keyword, setKeyword] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("All");
   const [subscribedCourses, setSubscribedCourses] = useState([]);
   const dispatch = useDispatch();
 
@@ -115,7 +131,7 @@ const MYCourses = ({ user }) => {
     if (user && user.subscription) {
       fetchSubscribedCourses();
     }
-  }, [user]);
+  }, [user, user.subscription]);
 
   useEffect(() => {
     if (error) {
@@ -135,6 +151,7 @@ const MYCourses = ({ user }) => {
   };
 
   const categories = [
+    "All",
     "Web development",
     "Artificial Intelligence",
     "Data Structure & Algorithm",
@@ -142,6 +159,13 @@ const MYCourses = ({ user }) => {
     "Data Science",
     "Game Development",
   ];
+
+  // Filter courses based on keyword and category
+  const filteredCourses = subscribedCourses.filter(course => {
+    const matchesKeyword = keyword === "" || course.title.toLowerCase().includes(keyword.toLowerCase());
+    const matchesCategory = category === "All" || course.category === category;
+    return matchesKeyword && matchesCategory;
+  });
 
   return (
     <Container minH={"95vh"} maxW="container.lg" paddingY={"8"}>
@@ -182,8 +206,8 @@ const MYCourses = ({ user }) => {
           justifyContent={["flex-start", "space-evenly"]}
           alignItems={["center", "flex-start"]}
         >
-          {subscribedCourses.length > 0 ? (
-            subscribedCourses.map((item) => (
+          {filteredCourses.length > 0 ? (
+            filteredCourses.map((item) => (
               <Course
                 key={item._id}
                 title={item.title}

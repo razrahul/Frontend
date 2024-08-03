@@ -17,6 +17,7 @@
     "axios": "^1.7.2",
     "chart.js": "^4.4.3",
     "framer-motion": "^11.2.13",
+    "lodash": "^4.17.21",
     "protected-route-react": "^1.0.1",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
