@@ -30,7 +30,7 @@ const CancelSubscribe = ({ user }) => {
   const params = useParams();
   const dispatch = useDispatch();
   const [key, setKey] = useState("");
-  const { loading, error, subscriptionId } = useSelector((state) => state.subscription);
+  const { loading, error,message, subscriptionId } = useSelector((state) => state.subscription);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -55,18 +55,22 @@ const CancelSubscribe = ({ user }) => {
       toast.error(error);
       dispatch({ type: 'clearError' });
     }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
     
   }, [
-    error,
+    error,message
   ]);
 
   const navigate = useNavigate();
 
   const cancelSubscriptionHandler = async() => {
-   await dispatch(cancelSubscription(params.id)) 
+   await dispatch(cancelSubscription(params.id, Course.price, "INR")) 
     toast.success("Subscription cancelled successfully");
     onClose();
-    navigate("/mycourses");
+    // navigate("/mycourses");
   };
 
   return (

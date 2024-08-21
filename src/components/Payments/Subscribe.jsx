@@ -59,7 +59,7 @@ const Subscribe = ({ user }) => {
     } = await axios.get(`${server}/razorpaykey`);
     // setKey(data.key)
     setKey(key);
-    dispatch(buySubscription(params.id));
+    dispatch(buySubscription(params.id, Course.price, "INR"));
   };
  
 
@@ -82,7 +82,7 @@ const Subscribe = ({ user }) => {
           name: 'E-Learning Web App',
           description: 'Get access in Course to all Mega content',
           image: logo,
-          subscription_id: subscriptionId,
+          order_id: subscriptionId,
           callback_url: `${server}/paymentverification`,
           prefill: {
             name: user.name,
