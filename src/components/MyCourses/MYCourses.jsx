@@ -128,10 +128,10 @@ const MYCourses = ({ user }) => {
   };
 
   useEffect(() => {
-    if (user && user.subscription) {
+    if (user && user?.subscription) {
       fetchSubscribedCourses();
     }
-  }, [user, user.subscription]);
+  }, [user, user?.subscription]);
 
   useEffect(() => {
     if (error) {
