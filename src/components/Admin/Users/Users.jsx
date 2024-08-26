@@ -12,15 +12,26 @@ import {
   Th,
   Thead,
   Tr,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Center,
+  Text,
+  Image
 } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
 import cursor from '../../../assets/images/cursor.png';
 import Sidebar from '../Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers, updateUserRole, deleteUser } from '../../../redux/actions/admin'
+import { getAllUsers, updateUserRole, deleteUser } from '../../../redux/actions/admin';
 import { toast } from 'react-toastify';
-
+import OpenSubscriptionItem from './SubcriptionItem';
 
 const Users = () => {
   //dayanimally
@@ -36,38 +47,40 @@ const Users = () => {
   //     },
   //   },
   // ]
-
-  const {  users, loading, error, message } = useSelector(state => state.admin);
-
+  const { users, loading, error, message } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
 
-  const updateHandler = userId => {
-    dispatch(updateUserRole(userId,onResponse ))
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const [selectedUser, setSelectedUser] = useState(null); 
+
+  const updateHandler = (userId) => {
+    dispatch(updateUserRole(userId, onResponse));
   };
-  const deleteButtonHandler = userId => {
+
+  const deleteButtonHandler = (userId) => {
     dispatch(deleteUser(userId, onResponse));
   };
 
-  const onResponse = () =>{
+  const onResponse = () => {
     if (error) {
       toast.error(error);
       dispatch({ type: 'clearError' });
-    }
-
-   else if (message) {
+    } else if (message) {
       toast.success(message);
       dispatch({ type: 'clearMessage' });
     }
 
     dispatch(getAllUsers());
-  }
-
-  
+  };
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, []);
+  }, [dispatch]);
 
+  const openSubscriptionHandler = (user) => {
+    setSelectedUser(user); // Set the selected user
+    onOpen(); // Open the modal
+  };
 
   return (
     <Grid
@@ -92,6 +105,7 @@ const Users = () => {
             <Thead>
               <Tr>
                 <Th>Id</Th>
+                <Th>Avatar</Th>
                 <Th>Name</Th>
                 <Th>Email</Th>
                 <Th>Role</Th>
@@ -102,18 +116,29 @@ const Users = () => {
 
             <Tbody>
               {users &&
-                users.map(item => (
+                users.map((item) => (
                   <Row
-                    updateHandler={updateHandler}
-                    deleteButtonHandler={deleteButtonHandler}
                     key={item._id}
                     item={item}
+                    updateHandler={updateHandler}
+                    deleteButtonHandler={deleteButtonHandler}
+                    openSubscriptionHandler={openSubscriptionHandler} // Pass the handler
                     loading={loading}
                   />
                 ))}
             </Tbody>
           </Table>
         </TableContainer>
+
+        {/* Render only one modal */}
+        {selectedUser && (
+          <OpenSubscriptionItem
+            isOpen={isOpen}
+            onClose={onClose}
+            user={selectedUser} // Pass selected user
+            loading={loading}
+          />
+        )}
       </Box>
 
       <Sidebar />
@@ -123,17 +148,27 @@ const Users = () => {
 
 export default Users;
 
-function Row({ item, updateHandler, deleteButtonHandler, loading  }) {
+function Row({ item, updateHandler, deleteButtonHandler, openSubscriptionHandler, loading }) {
   return (
     <Tr>
       <Td>#{item._id}</Td>
+      <Td>
+        <Image src={item.avatar.url} boxSize={'60px'} borderRadius={'10px'} />
+      </Td>
       <Td>{item.name}</Td>
       <Td>{item.email}</Td>
       <Td>{item.role}</Td>
-      <Td>
-        {item.subscription && item.subscription.status === 'active'
-          ? 'Active'
-          : 'Not Active'}
+      <Td isNumeric>
+        <HStack justifyContent={'flex-end'}>
+          <Button
+            onClick={() => openSubscriptionHandler(item)} // Pass entire user object
+            variant={'outline'}
+            color="blue.500"
+            isLoading={loading}
+          >
+            Open Subscription
+          </Button>
+        </HStack>
       </Td>
 
       <Td isNumeric>
