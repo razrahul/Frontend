@@ -47,6 +47,8 @@ const Users = () => {
   //     },
   //   },
   // ]
+  const { courses } = useSelector((state) => state.course)
+ 
   const { users, loading, error, message } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
 
@@ -137,6 +139,7 @@ const Users = () => {
             onClose={onClose}
             user={selectedUser} // Pass selected user
             loading={loading}
+            courses={courses}
           />
         )}
       </Box>

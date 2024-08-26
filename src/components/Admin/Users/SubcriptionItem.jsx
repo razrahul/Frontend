@@ -20,7 +20,13 @@ import {
   TableCaption,
 } from "@chakra-ui/react";
 
-function OpenSubscriptionItem({ isOpen, onClose, user, loading }) {
+function OpenSubscriptionItem({ isOpen, onClose, user, loading, courses }) {
+
+  const CourseHandler = (id) => {
+    const course = courses.find((course) => course._id === id);
+    return course ? course.title : "Not Found";
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -56,7 +62,7 @@ function OpenSubscriptionItem({ isOpen, onClose, user, loading }) {
           {user.role === "admin" ? (
             <Heading
               textTransform={"uppercase"}
-              children="User is an admin and has acess All subscriptions."
+              children="User is an admin and has access to all subscriptions."
               my="20"
               textAlign={"center"}
             />
@@ -74,6 +80,7 @@ function OpenSubscriptionItem({ isOpen, onClose, user, loading }) {
                       <Tr>
                         <Th>Subscription ID</Th>
                         <Th>Course ID</Th>
+                        <Th>Course Name</Th>
                         <Th>Status</Th>
                         <Th>Order ID</Th>
                       </Tr>
@@ -83,6 +90,7 @@ function OpenSubscriptionItem({ isOpen, onClose, user, loading }) {
                         <Tr key={sub._id}>
                           <Td>{sub._id}</Td>
                           <Td>{sub.course}</Td>
+                          <Td>{CourseHandler(sub.course)}</Td>
                           <Td>{sub.status}</Td>
                           <Td>{sub.id}</Td>
                         </Tr>
