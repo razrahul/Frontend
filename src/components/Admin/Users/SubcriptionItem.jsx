@@ -53,40 +53,52 @@ function OpenSubscriptionItem({ isOpen, onClose, user, loading }) {
             <Text fontWeight="bold">Role: {user.role}</Text>
           </Box>
 
-          {/* Check if user.subscription exists and is an array */}
-          {Array.isArray(user.subscription) && user.subscription.length > 0 ? (
-            <TableContainer w={["100vw", "full"]}>
-              <Table variant="simple" size="lg">
-                <TableCaption>
-                  All available user subscriptions in the database
-                </TableCaption>
-                <Thead>
-                  <Tr>
-                    <Th>Subscription ID</Th>
-                    <Th>Course ID</Th>
-                    <Th>Status</Th>
-                    <Th>Order ID</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {user.subscription.map((sub) => (
-                    <Tr key={sub._id}>
-                      <Td>{sub._id}</Td>
-                      <Td>{sub.course}</Td>
-                      <Td>{sub.status}</Td>
-                      <Td>{sub.id}</Td>
-                    </Tr>
-                  ))}
-                </Tbody>
-              </Table>
-            </TableContainer>
-          ) : (
+          {user.role === "admin" ? (
             <Heading
               textTransform={"uppercase"}
-              children="No subscription data available."
+              children="User is an admin and has acess All subscriptions."
               my="20"
               textAlign={"center"}
             />
+          ) : (
+            <>
+              {/* Check if user.subscription exists and is an array */}
+              {Array.isArray(user.subscription) &&
+              user.subscription.length > 0 ? (
+                <TableContainer w={["100vw", "full"]}>
+                  <Table variant="simple" size="lg">
+                    <TableCaption>
+                      All available user subscriptions in the database
+                    </TableCaption>
+                    <Thead>
+                      <Tr>
+                        <Th>Subscription ID</Th>
+                        <Th>Course ID</Th>
+                        <Th>Status</Th>
+                        <Th>Order ID</Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {user.subscription.map((sub) => (
+                        <Tr key={sub._id}>
+                          <Td>{sub._id}</Td>
+                          <Td>{sub.course}</Td>
+                          <Td>{sub.status}</Td>
+                          <Td>{sub.id}</Td>
+                        </Tr>
+                      ))}
+                    </Tbody>
+                  </Table>
+                </TableContainer>
+              ) : (
+                <Heading
+                  textTransform={"uppercase"}
+                  children="No subscription data available."
+                  my="20"
+                  textAlign={"center"}
+                />
+              )}
+            </>
           )}
         </ModalBody>
         <ModalFooter>
