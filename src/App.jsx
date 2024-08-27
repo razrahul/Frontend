@@ -27,6 +27,7 @@ import {
   ResetPassword,
   MYCourses,
   CancelSubscribe,
+  CourseDetail,
 } from "./components/index";
 import viteLogo from "/vite.svg";
 import { useSelector, useDispatch } from "react-redux";
@@ -94,6 +95,7 @@ function App() {
             <Route path="courses" element={<Courses  />} />
             <Route path="mycourses" element={<MYCourses user={user} />} />
             <Route path="course/:id" element={<CoursePage />} />
+            <Route path="coursedeatil/:id" element={<CourseDetail/>} />
             <Route path="contact" element={<Contact />} />
             <Route path="request" element={<Request />} />
             <Route path="about" element={<About />} />

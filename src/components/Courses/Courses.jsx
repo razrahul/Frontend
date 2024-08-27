@@ -10,6 +10,7 @@ import {
   Text,
   VStack,
   Spinner,
+  Box
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -42,14 +43,21 @@ const Course = ({
     // boxShadow="md"
     width={["full", "300px"]}
   >
-    <Image
-      src={imageSrc}
-      alt={title}
-      width="100%" 
-      height="220px" 
-      objectFit="cover" 
-      borderRadius="md" 
-    />
+    <Box w='full' h={'220px'}>
+    <Link to={`/coursedeatil/${id}`}>
+      <Image
+        src={imageSrc}
+        alt={title}
+        width="100%"
+        height="220px"
+        objectFit="cover"
+        borderRadius="md"
+        _hover={{ cursor: "pointer" }}
+      />
+    </Link>
+    </Box>
+    
+   
     <Heading
       textAlign={["center", "left"]}
       maxW="220px"

@@ -24,6 +24,7 @@ import  AdminCourses from './Admin/AdminCourses/AdminCourses.jsx'
 import  Users from './Admin/Users/Users.jsx'
 import MYCourses from './MyCourses/MYCourses.jsx'
 import CancelSubscribe  from './Payments/CancelSubscribe.jsx'
+import CourseDetail from './CourseDetail/CourseDetail.jsx'
 
 export{
     Home,
@@ -52,5 +53,7 @@ export{
     Users,
     MYCourses,
     CancelSubscribe,
-  
+    CourseDetail,
 }
+  
+
