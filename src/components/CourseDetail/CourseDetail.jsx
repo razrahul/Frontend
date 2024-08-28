@@ -39,7 +39,7 @@ const CourseDetail = () => {
 
         {/* Breadcrumb */}
         <Text mt={4} color="gray.400">
-          Home &gt; {Course.category}
+          Home &gt; {Course?.category}
         </Text>
 
         {/* Main Content */}
@@ -54,7 +54,7 @@ const CourseDetail = () => {
               Bestseller
             </Badge>
             <Heading as="h2" size="2xl">
-             {Course.title}
+             {Course?.title}
             </Heading>
             <Text fontSize="lg" color="gray.200">
               Become a Certified Data Scientist with PW Skills and utilize the
@@ -79,8 +79,8 @@ const CourseDetail = () => {
           <Box maxW={'xl'} mt={[6, 0]} alignSelf='center' justifyContent='center' justifySelf='end'>
             <Image
               boxSize='full'
-              src={Course.poster.url}
-              alt={Course.title}
+              src={Course?.poster.url}
+              alt={Course?.title}
               borderRadius="lg"
             />
           </Box>
@@ -135,7 +135,7 @@ const CourseDetail = () => {
           <Button colorScheme="orange">Register Here</Button>
         </Grid>
       </Box>
-      <CourseAbout CourseTitle={Course.title} />
+      <CourseAbout CourseTitle={Course?.title} />
       <CourseDown />
     </>
   );
