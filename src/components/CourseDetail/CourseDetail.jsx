@@ -8,14 +8,14 @@ import {
   Grid,
   Badge,
   VStack,
-  Link,
 } from "@chakra-ui/react";
 import CourseAbout from "./CourseAbout.jsx";
 import CourseDown from "./CourseOfferings.jsx";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const CourseDetail = () => {
+const CourseDetail = ({user}) => {
 
   const params = useParams();
   //  console.log(params.id)
@@ -34,7 +34,13 @@ const CourseDetail = () => {
           <Heading as="h1" size="lg" color="white">
             E-Learning Web App
           </Heading>
-          <Button colorScheme="orange">Login / Register</Button>
+          {!user ? (
+            <Link to={`/login`}>
+              <Button colorScheme="orange">Login / Register</Button>
+            </Link>
+          )
+          :null}
+          
         </Grid>
 
         {/* Breadcrumb */}
@@ -129,10 +135,12 @@ const CourseDetail = () => {
 
         {/* Footer */}
         <Grid templateColumns="1fr auto" mt={12} alignItems="center">
-          <Link color="orange.400" href="#">
+          <Link color="orange.400" to={"/contact"}>
             Talk to Our Counsellor
           </Link>
-          <Button colorScheme="orange">Register Here</Button>
+          <Link to={"/contact"}>
+           <Button colorScheme="orange">Contact Us Here</Button>
+          </Link>
         </Grid>
       </Box>
       <CourseAbout CourseTitle={Course?.title} />

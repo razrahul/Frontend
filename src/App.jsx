@@ -95,7 +95,7 @@ function App() {
             <Route path="courses" element={<Courses  />} />
             <Route path="mycourses" element={<MYCourses user={user} />} />
             <Route path="course/:id" element={<CoursePage />} />
-            <Route path="coursedeatil/:id" element={<CourseDetail/>} />
+            <Route path="coursedeatil/:id" element={<CourseDetail user={user}/>} />
             <Route path="contact" element={<Contact />} />
             <Route path="request" element={<Request />} />
             <Route path="about" element={<About />} />
