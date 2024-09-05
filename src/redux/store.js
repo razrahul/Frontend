@@ -19,4 +19,6 @@ const store = configureStore({
 
 export default store;
 
-export const server = "http://localhost:8000/api/v1";
+export const server = "https://backend-p5pz.onrender.com/api/v1";
+
+//https://backend-p5pz.onrender.com
