@@ -19,7 +19,9 @@ const store = configureStore({
 
 export default store;
 
-export const server = "/api/v1";
+// export const server = "/api/v1";
+
+export const server = "https://backend-p5pz.onrender.com/api/v1";
 
 //https://backend-p5pz.onrender.com
 //cors error
